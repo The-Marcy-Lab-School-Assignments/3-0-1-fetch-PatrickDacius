@@ -50,18 +50,18 @@ export const renderStatus = (statusDiv, statusInfoObj) => {
 }
 
 
-export const renderUsers = (usersUI, users) => {
-  usersUI.replaceChildren()
+export const renderUsers = (usersUl, users) => {
+  usersUl.innerHTML = ''
   users.forEach(user => {
     const userLi = document.createElement('li')
     userLi.className = "user-card"
-    userLi.textcontent = `Username: ${username.name}, id: ${user.id}`
+    // userLi.textcontent = `Username: ${username.name}, id: ${user.id}`
 
     const button = document.createElement('button')
-    button.id = 'data-user-id'
-    button.textContent = `Load ${username.name}'s posts`
+    button.setAttribute('data-user-id', user.id)
+    button.textContent = `Load ${user.username}'s posts`
 
-    users.append(userLi)
+    usersUl.append(userLi)
     userLi.append(button)
 
   });
@@ -69,8 +69,24 @@ export const renderUsers = (usersUI, users) => {
 
 };
 
-export const renderPosts = () => {
+export const renderPosts = (postsUl, posts) => {
+  postsUl.innerHTML = ''
+
+  posts.forEach(post => {
+    const li = document.createElement('li');
+    const title = document.createElement('h2');
+    const body = document.createElement('p');
+
+    title.textContent = post.title;
+    body.textContent = post.body;
+
+    li.append(title, body);
+    postsUl.appendChild(li);
+  });
 }
+
+
+
 
 export const renderNewUser = (newUserDiv, newUserInfo) => {
 
